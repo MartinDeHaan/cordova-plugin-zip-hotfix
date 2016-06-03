@@ -120,7 +120,7 @@ public class Zip extends CordovaPlugin {
             {
                 anyEntries = true;
                 String compressedName = ze.getName();
-                compressedName=compressedName.replace("\", "/");
+                compressedName=compressedName.replace("\\", "/");
 
                 if (ze.isDirectory()) {
                    File dir = new File(outputDirectory + compressedName);
