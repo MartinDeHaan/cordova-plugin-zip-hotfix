@@ -120,9 +120,7 @@ public class Zip extends CordovaPlugin {
             {
                 anyEntries = true;
                 String compressedName = ze.getName();
-                compressedName=compressedName.replace("\\", "/");
-                
-                progress.setFileName(outputDirectory + compressedName);
+                compressedName = compressedName.replace("\\", "/");
 
                 if (ze.isDirectory()) {
                    File dir = new File(outputDirectory + compressedName);
@@ -186,8 +184,7 @@ public class Zip extends CordovaPlugin {
     private static class ProgressEvent {
         private long loaded;
         private long total;
-        private String fileName;
-        
+
         public long getLoaded() {
             return loaded;
         }
@@ -203,15 +200,11 @@ public class Zip extends CordovaPlugin {
         public void setTotal(long total) {
             this.total = total;
         }
-        public void setFileName(String fileName) {
-            this.fileName = fileName;
-        }
-        
+
         public JSONObject toJSONObject() throws JSONException {
             return new JSONObject(
                     "{loaded:" + loaded +
-                    ",total:" + total + 
-                    ",fileName:" + fileName + "}");
+                    ",total:" + total + "}");
         }
     }
 }
