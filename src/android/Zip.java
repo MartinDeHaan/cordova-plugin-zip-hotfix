@@ -130,6 +130,7 @@ public class Zip extends CordovaPlugin {
                     file.getParentFile().mkdirs();
                     if(file.exists() || file.createNewFile()){
                         Log.w("Zip", "extracting: " + file.getPath());
+                        progress.setFileName(file.getPath());
                         FileOutputStream fout = new FileOutputStream(file);
                         int count;
                         while ((count = zis.read(buffer)) != -1)
@@ -183,6 +184,8 @@ public class Zip extends CordovaPlugin {
     private static class ProgressEvent {
         private long loaded;
         private long total;
+        private String fileName;
+        
         public long getLoaded() {
             return loaded;
         }
@@ -198,10 +201,15 @@ public class Zip extends CordovaPlugin {
         public void setTotal(long total) {
             this.total = total;
         }
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+        
         public JSONObject toJSONObject() throws JSONException {
             return new JSONObject(
                     "{loaded:" + loaded +
-                    ",total:" + total + "}");
+                    ",total:" + total + 
+                    ",fileName:" + fileName + "}");
         }
     }
 }
